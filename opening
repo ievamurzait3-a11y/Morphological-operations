@@ -1,0 +1,23 @@
+import numpy as np
+import cv2 as cv
+
+original = cv.imread(r'C:\Users\ievas\Downloads\original.png')
+cv.imshow('original', original)
+
+bw = cv.cvtColor(original, cv.COLOR_BGR2GRAY)
+(thresh,bina) = cv.threshold(bw,127,255,cv.THRESH_BINARY)
+
+k = np.ones((7,7), np.uint8)
+
+def erosion(img, k):
+    eroded = cv.erode(img,k)
+    return eroded
+
+def dilation(img, k):
+    dilated = cv.dilate(img,k)
+    return dilated
+
+opening1 = erosion(bina, k)
+opening = dilation(opening1, k)
+cv.imshow('image_opened', opening)
+cv.waitKey(0)

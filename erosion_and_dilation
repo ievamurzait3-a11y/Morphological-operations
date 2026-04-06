@@ -1,0 +1,19 @@
+import numpy as np
+import cv2 as cv
+
+original = cv.imread(r'C:\Users\ievas\Downloads\original.png')
+cv.imshow('original', original)
+
+bw = cv.cvtColor(original, cv.COLOR_BGR2GRAY)
+
+(thresh,bina) = cv.threshold(bw,127,255,cv.THRESH_BINARY)
+cv.imshow('binary', bina)
+
+k = np.ones((7,7), np.uint8)
+eroded = cv.erode(bina,k)
+cv.imshow('eroded', eroded)
+
+dilated = cv.dilate(bina,k)
+cv.imshow('dilated', dilated)
+
+cv.waitKey(0)
